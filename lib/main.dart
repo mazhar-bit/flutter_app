@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'voiceapp.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,9 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             title: Text("voice App"),
+            backgroundColor: Colors.greenAccent,
           ),
           body:(
           Column(
@@ -20,7 +25,8 @@ class MyApp extends StatelessWidget {
              Center(
 
                 child:Radiobutton(),
-              ),
+
+             ),
              ],
           )      )
 
@@ -42,10 +48,10 @@ class RadioButtonWidget extends State {
     return Column(
 
       children: <Widget>[
-
+          Text("Do you want Go To Next Page"),
         RadioListTile(
           groupValue: radioItem,
-          title: Text('Radio Button Item 1'),
+          title: Text('yes'),
           value: ' 1',
           onChanged: (val) {
             setState(() {
@@ -56,7 +62,7 @@ class RadioButtonWidget extends State {
 
         RadioListTile(
           groupValue: radioItem,
-          title: Text('Radio Button Item 2'),
+          title: Text('No'),
           value: ' 0',
           onChanged: (val) {
             setState(() {
@@ -66,8 +72,22 @@ class RadioButtonWidget extends State {
         ),
 
 
-        Text('$radioItem', style: TextStyle(fontSize: 23),)
+        //Text('$radioItem', style: TextStyle(fontSize: 23),),
 
+        RaisedButton(onPressed:() {
+
+        Navigator.of(context).push(MaterialPageRoute(builder:(context) => voiceapp(radioItem:radioItem),
+
+
+        ));
+        },
+        child: Text("Next"),
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+          side: BorderSide(color: Colors.blueAccent),
+          )
+
+        )
       ],
     );
   }
